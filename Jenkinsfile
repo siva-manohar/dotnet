@@ -26,7 +26,7 @@ pipeline {
 			  docker pull 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/docker1:${BUILD_NUMBER}
 			  docker run -itd -p 3000:3000 --name dotnet-app 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/docker1:${BUILD_NUMBER}
 			  '''	 
-		    }
+		    
       		}
 		}		    
 
