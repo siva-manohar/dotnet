@@ -19,7 +19,6 @@ pipeline {
 
     stage('Deploy docker'){
       steps {
-	    #withCredentials([file(credentialsId: 'docker', variable: 'PEM_FILE')]) {
 		sh '''
 			  
 			  ssh -i /var/lib/jenkins/.ssh/application.pem -o StrictHostKeyChecking=no ubuntu@ec2-13-215-154-204.ap-southeast-1.compute.amazonaws.com
