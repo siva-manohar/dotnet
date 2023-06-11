@@ -19,10 +19,10 @@ pipeline {
 
     stage('Deploy docker'){
       steps {
-	     sshagent(credentials: ['18.139.111.144']) {
+	     withCredentials([file(credentialsId: 'docker', variable: 'PEM_FILE')]) {
 		sh '''
-			  ssh -i $HOME/.ssh/id_rsa user@host
-			  #ssh -i my-key.pem -o StrictHostKeyChecking=no ubuntu@ec2-18-139-111-144.ap-southeast-1.compute.amazonaws.com
+			  echo "${PEM_FILE}" > my-key.pem
+			  ssh -i my-key.pem -o StrictHostKeyChecking=no ubuntu@ec2-18-139-111-144.ap-southeast-1.compute.amazonaws.com
 			  aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com
 			  docker pull 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/docker1:${BUILD_NUMBER}
 			  docker run -itd -p 3000:3000 --name dotnet-app 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/docker1:${BUILD_NUMBER}
