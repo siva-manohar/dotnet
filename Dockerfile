@@ -23,3 +23,4 @@ EXPOSE 3000
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "panz.dll"]
+CLOSE
