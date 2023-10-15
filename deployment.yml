@@ -23,9 +23,8 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
-        
-        
-        
+
+# testing purpose             
  # service type loadbalancer       
 ---
 apiVersion: v1

@@ -6,9 +6,10 @@ pipeline {
       steps {
 		sh '''
 		 whoami
-		 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 713179705108.dkr.ecr.us-east-1.amazonaws.com
-		 docker build -t 713179705108.dkr.ecr.us-east-1.amazonaws.com/dotnet_project:${BUILD_NUMBER} .	
-		 docker push 713179705108.dkr.ecr.us-east-1.amazonaws.com/dotnet_project:${BUILD_NUMBER}
+		 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com
+		 docker build -t docker1 .
+		 docker tag docker1:latest 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/docker1:${BUILD_NUMBER}
+		 docker push 933542948767.dkr.ecr.ap-southeast-1.amazonaws.com/docker1:${BUILD_NUMBER}
 		  '''
 	     }	         
 	   }
