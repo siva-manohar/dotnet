@@ -1,4 +1,5 @@
 pipeline {
+	agent any
 	stages {
 		stage ( " build the docker and push to ECR ") {
 			steps {
