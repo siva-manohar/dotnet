@@ -7,7 +7,7 @@ docker ps -a
 echo "This commands shows if existing docker is present or not"
 
 docker rm -f dotnet-app
-echo "delete the container "
+echo "delete the container if teh container is present"
 
 docker ps -a
 echo "empty docker"
