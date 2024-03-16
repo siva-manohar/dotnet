@@ -7,10 +7,10 @@ docker ps -a
 echo "This commands shows if existing docker is present or not"
 
 docker rm -f dotnet-app
-echo "delete the container if teh container is present"
+echo "delete the container if the container is present"
 
 docker ps -a
-echo "empty docker"
+echo "Check the container is deleted or not"
 
 docker run -itd -p 3000:3000 --name dotnet-app 533267090797.dkr.ecr.us-east-1.amazonaws.com/docker_project:$1
 
