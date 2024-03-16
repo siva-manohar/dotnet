@@ -13,7 +13,7 @@ pipeline {
         stage('deploy'){
             steps{
                 sh '''
-                ssh -i /var/lib/jenkins/siva_8.pem -o StrictHostKeyChecking=no ubuntu@ec2-100-24-9-5.compute-1.amazonaws.com 'bash -s' < ./deploy.sh \${BUILD_NUMBER}
+                ssh -i /var/lib/jenkins/siva_8.pem -o StrictHostKeyChecking=no ubuntu@ec2-3-89-207-110.compute-1.amazonaws.com 'bash -s' < ./deploy.sh \${BUILD_NUMBER}
                 '''
             }
         }
