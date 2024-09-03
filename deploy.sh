@@ -1,18 +1,10 @@
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267090797.dkr.ecr.us-east-1.amazonaws.com
+#!/bin/bash
 
-docker pull 533267090797.dkr.ecr.us-east-1.amazonaws.com/docker_project:$1
-echo "docker pull succeeded"
+# aws ecr and docker login
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 590183962065.dkr.ecr.us-east-1.amazonaws.com
 
-docker ps -a
-echo "This commands shows if existing docker is present or not"
+# Docker pull image
+docker pull 590183962065.dkr.ecr.us-east-1.amazonaws.com/docker_project:$1
 
-docker rm -f dotnet-app
-echo "delete the container if the container is present"
-
-docker ps -a
-echo "Check the container is deleted or not"
-
-docker run -itd -p 3000:3000 --name dotnet-app 533267090797.dkr.ecr.us-east-1.amazonaws.com/docker_project:$1
-
-docker ps -a
-echo "docker container deployed successfully"
+# dokcer run the image
+docker run -itd -p 8000:8000 --name dotnet-app 590183962065.dkr.ecr.us-east-1.amazonaws.com/docker_project:$1
