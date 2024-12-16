@@ -10,13 +10,6 @@ pipeline {
                 docker push 590183962065.dkr.ecr.us-east-1.amazonaws.com/docker_project:${BUILD_NUMBER}
                 '''
             }
-
-        }
-        stage ('deploy') {
-            steps {
-
-            }
-
         }
     }
 }
