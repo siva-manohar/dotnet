@@ -11,5 +11,12 @@ pipeline {
                 '''
             }
         }
+        stage ('deploy') {
+            steps {
+                sh '''
+                ssh -i /var/lib/jenkins/test-keypair.pem -o StrictHostKeyChecking=no ubuntu@ec2-3-82-105-58.compute-1.amazonaws.com 'bash -s' < ./deploy.sh \${BUILD_NUMBER}
+                '''
+            }
+        }
     }
 }
