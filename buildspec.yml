@@ -26,23 +26,25 @@ phases:
       - docker push $IMAGE_URI
       - echo "Image pushed to ECR: $IMAGE_URI"
 
-      - echo "Deploying to EC2 instance..."
-      - echo "Updating the Docker image on the EC2 instance..."
-      - aws ssm send-command \
+      - |
+        echo "Deploying to EC2 instance..."
+        aws ssm send-command \
           --instance-ids $EC2_INSTANCE_ID \
           --document-name "AWS-RunShellScript" \
-          --parameters '{"commands":[
-            "echo Logging in to Amazon ECR...",
-            "aws ecr get-login-password --region '"$AWS_DEFAULT_REGION"' | docker login --username AWS --password-stdin '"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"'",
-            "echo Pulling the latest Docker image...",
-            "docker pull '"$IMAGE_URI"'",
-            "echo Stopping the existing container...",
-            "docker stop my-app || true",
-            "echo Removing the existing container...",
-            "docker rm my-app || true",
-            "echo Starting the new container...",
-            "docker run -d --name my-app -p 80:80 '"$IMAGE_URI"'"
-          ]}'
+          --parameters '{
+            "commands": [
+              "echo Logging in to Amazon ECR...",
+              "aws ecr get-login-password --region '"$AWS_DEFAULT_REGION"' | docker login --username AWS --password-stdin '"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"'",
+              "echo Pulling the latest Docker image...",
+              "docker pull '"$IMAGE_URI"'",
+              "echo Stopping the existing container...",
+              "docker stop my-app || true",
+              "echo Removing the existing container...",
+              "docker rm my-app || true",
+              "echo Starting the new container...",
+              "docker run -d --name my-app -p 80:80 '"$IMAGE_URI"'"
+            ]
+          }'
 
 artifacts:
   files:
