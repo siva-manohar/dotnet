@@ -52,5 +52,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           key: ${{ secrets.KEY }}
           script: |
-            echo "Current user before ansible-playbook: $(whoami)"
-            ansible-playbook docker-full.yaml --tags=deploy -vv
+            sudo -u ansibleadmin ansible-playbook docker-full.yaml --tags=deploy -vv
