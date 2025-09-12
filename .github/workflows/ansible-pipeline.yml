@@ -28,5 +28,5 @@ jobs:
       - name: docker build and push
         id: build-image
         run: |
-          docker build -f Dockerfile -t 888576196681.dkr.ecr.us-west-1.amazonaws.com/ansible-project:stage
+          docker build -t 888576196681.dkr.ecr.us-west-1.amazonaws.com/ansible-project:stage
           docker push 888576196681.dkr.ecr.us-west-1.amazonaws.com/ansible-project:stage
