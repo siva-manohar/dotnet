@@ -30,3 +30,26 @@ jobs:
         run: |
           docker build -f Dockerfile -t 888576196681.dkr.ecr.us-west-1.amazonaws.com/ansible-project:stage .
           docker push 888576196681.dkr.ecr.us-west-1.amazonaws.com/ansible-project:stage
+          
+  run-playbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v5
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5.0.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ACCESS_SECRET_KEY }}
+          aws-region: us-west-1
+
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ansibleadmin
+          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.KEY }}
+          script: |
+            ansible-playbook docker-full.yaml --tags=deploy -vv
