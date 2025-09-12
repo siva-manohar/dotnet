@@ -48,8 +48,9 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
-          username: ansibleadmin
+          username: ec2-user
           password: ${{ secrets.PASSWORD }}
           key: ${{ secrets.KEY }}
           script: |
+            sudo su - ansibleadmin
             ansible-playbook docker-full.yaml --tags=deploy -vv
